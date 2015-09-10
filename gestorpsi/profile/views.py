@@ -31,7 +31,7 @@ from gestorpsi.place.models import Place, PlaceType
 from gestorpsi.service.models import Service
 from gestorpsi.careprofessional.views import save_careprof
 from datetime import time
-from gestorpsi.client.views import family_form
+from gestorpsi.client.forms import FamilyForm
 
 def form(request):
     try:
@@ -55,6 +55,8 @@ def form(request):
     emails    = object.person.emails.all()
     websites  = object.person.sites.all()
     ims       = object.person.instantMessengers.all()
+
+    form = FamilyForm()
 
     return render_to_response('profile/profile_person.html', locals(), context_instance=RequestContext(request))
 

@@ -18,7 +18,33 @@ GNU General Public License for more details.
 
 {% include "meta/people_indentification.html" %}
 {% include "meta/people_profile.html" %}
-{% include "client/client_family_form.html" %}
+
+<fieldset>
+	<a name="form"></a>
+	<legend>{% trans "Add new client and set it client as a related family member" %}</legend>
+	<input type="hidden" name="client_id" value="">
+	<label>{% trans "Name" %}<br />{{ form.name }}</label>
+	<label>{% trans "Family Relation Level" %}<br />{{ form.relation_level }}</label>                    
+	<label>{% trans "Is Responsible" %}<br />
+		{% if not is_reverse %}
+		{{ form.responsible }}
+		{% else %}
+		{% if form.instance and not form.instance.responsible %}
+		{{ form.responsible }}
+		{% else %}
+		{% trans "Note: You can not set it as responsible because client already have a responsible" %} ({{ form.instance.client_related}}). {% trans "Add another relation instead" %}
+		{% endif %}
+		{% endif %}
+	</label>
+
+	<label{% if not form.instance.id %} style="display:none;"{% endif %}>{% trans "Is Active?" %}<br />{{ form.active }}</label>
+
+	{% if form.instance.id %}
+	<div style="clear:both;"></div>
+	<label>{{ form.comment.label }}<br />{{ form.comment }}</label>
+	{% endif %}
+</fieldset>
+
 {% include "meta/phones.html" %}
 {% include "meta/addressbook.html" %}
 {% include "meta/internet.html" %}
