@@ -19,11 +19,22 @@ from gestorpsi.client.models import Family
 from gestorpsi.person.models import Person
 from gestorpsi.client.models import Client
 
+def set_field_html_name(cls, new_name):
+    """
+    This creates wrapper around the normal widget rendering, 
+    allowing for a custom field name (new_name).
+    """
+    old_render = cls.widget.render
+    def _widget_render_wrapper(name, value, attrs=None):
+        return old_render(new_name, value, attrs)
+
+    cls.widget.render = _widget_render_wrapper
 
 class FamilyForm(forms.ModelForm):
     name = forms.CharField(required=True,
                            widget=forms.TextInput(attrs={'class': 'big'}))
 
+    set_field_html_name(name, 'family_name')
     class Meta:
         model = Family
         fields = ('name', 'relation_level', 'responsible', 'active', 'comment')
@@ -36,7 +47,7 @@ class FamilyForm(forms.ModelForm):
                 pk=request.POST.get('client_id'),
                 person__organization=request.user.get_profile().org_active)[0]
         else:  # client and person is new, lets create it before
-            person = Person(name=request.POST.get('name'))
+            person = Person(name=request.POST.get('family_name'))
             person.save()
             person.organization.add(request.user.get_profile().org_active.id)
             client_related = Client(person=person,

@@ -177,6 +177,8 @@ def add(request):
             cities = City.objects.filter(state=request.user.get_profile().org_active.address.all()[0].city.state)
         except:
             cities = {}
+
+        form = FamilyForm()
         return render_to_response('client/client_form.html',
                                         {
                                         'countries': Country.objects.all(),
@@ -194,6 +196,7 @@ def add(request):
                                         'ReferralChoices': ReferralChoice.objects.all(),
                                         'Relations': Relation.objects.all(),
                                         'cnae': Cnae.objects.all(),
+                                        'form': form,
                                          },
                                         context_instance=RequestContext(request))
 
@@ -362,6 +365,7 @@ def form(request, object_id=''):
         template_name = 'client/client_form.html'
         company_form = None
 
+    form = FamilyForm()
     return render_to_response(template_name,
                               {'object': object,
                                 'phones' : object.person.phones.all(),
@@ -389,6 +393,7 @@ def form(request, object_id=''):
                                 'clss': request.GET.get('clss'),
                                 'company_form': company_form,
                                 'cnae': cnae,
+                                'form': form,
                                },
                               context_instance=RequestContext(request)
                               )
