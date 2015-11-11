@@ -15,53 +15,13 @@ GNU General Public License for more details.
 
 */
 
-* {
-        margin: 0; padding: 0;  letter-spacing: inherit;
-}
-
-body {
-        font-family: Verdana, Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        min-width: 1000px;
-        overflow-y: visible;
-        height: 100%;
-}
-img { border:0px;}
-a, a:visited {
-        text-decoration: none;
-        color: #2688AE;
-        font-weight: bold;
-        cursor: pointer;
-}
-a:hover {
-        color: #2688AE;
-        text-decoration: underline;
-}
-
 #bar {
-        background: #005A7D url(/media/img/logo_gestorpsi_peq.gif) no-repeat;
-        height: 18px;
+        background-color: #005A7D;
 }
-#bar h1 {
-        display: none;
-}
-#bar ul {
-        float: right;
-        padding-right: 5px;
-        color: #fff;
-}
+#bar a:link {color: white;}
+#bar a:hover {color: #CCC;}
+#bar a:visited {color: white;}
 
-#bar li {
-        display: inline;
-        text-align: right;
-        padding-right: 3px;
-        padding-left: 3px;
-}
-#bar li a {
-        color: #fff;
-        font-size: 10px;
-        font-weight: bold;
-}
 #menu_log {
         float: right;
         font-size: 10px;
@@ -95,7 +55,7 @@ a:hover {
         display: block;
         float: left;
         list-style: none;
-        height: 16px;
+        height: 29px;
         padding: 8px 10px 5px 30px;
         color: #000000;
         text-decoration: none;
@@ -114,7 +74,7 @@ a:hover {
         padding: 7px 9px 7px 29px;
         -moz-border-radius: 8px 8px 0 0;
         -webkit-border-radius: 8px 8px 0 0;
-        height: 15px;
+        height: 29px;
 }
 
 .border_menu_active {
@@ -187,7 +147,7 @@ div#logotype span{
         display: block;
         float: left;
         list-style: none;
-        height: 16px;
+        height: 33px;
         padding: 13px 20px 5px 20px;
         color: #787878;
         text-decoration: none;
@@ -199,7 +159,7 @@ div#logotype span{
         -webkit-border-radius: 8px 8px 0 0;
         padding: 13px 20px 6px 20px;
         border-bottom: 1px solid #DDDDDD;
-        height: 16px;
+        height: 33px;
 }
 
 div#sub_menu .active {
@@ -258,7 +218,6 @@ ul.myoffice li a:hover { -moz-border-radius: 0px !important; background-color:#F
         display: block;
         position: absolute;
         top: 30px;
-        left: -210px;
         width: 208px;
         background: #FCFCFC;
         z-index: 5;
@@ -340,15 +299,9 @@ ul.myoffice li a:hover { -moz-border-radius: 0px !important; background-color:#F
 }
 
 #content {
-        width: 990px;
-        height: 85vh;
-        margin-bottom: 10px;
-        overflow-y:auto;
-        overflow-x: hidden;
 }
 
 div.main_area h1, #content h2 {
-        font-family: Georgia, "Times New Roman", Times, serif;
 
 }
 
@@ -359,12 +312,9 @@ div.main_area h1 {
 }
 
 #content h2 {
-        font-size: 22px;
-        line-height: 24px;
         color: #808080;
         font-weight: normal;
         padding: 15px 0 7px 70px;
-        height: 45px;
 }
 #content p {
         font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -395,7 +345,7 @@ div.main_area h1 {
 
 #content p.description {
         font-size: 9px;
-        margin: -25px 0 10px 65px;
+        margin: -20px 0 10px 54px;
 }
 #content p.description a {
         font-weight: bold;
