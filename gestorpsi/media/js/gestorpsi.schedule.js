@@ -317,14 +317,19 @@ $(function() {
                                 line = line + '<option value="' + this.id + '">' + this.service + '</option>';
                             }
 
-                            // for (var i = 0; i < str_professional_list.length; i++) {
-                            //     console.log(str_professional_list[i]);
-                            // }
+                            for (var i = 0; i < str_professional_inline.length; i++) {
+                                console.log(this.service + str_professional_inline);
+                            }
 
 
                     } 
                 }); 
                 $('#form select[name=referral]').html(line); // rebuild referral select
+                $('#form div[class=checkbox]').html(
+
+                    '<label><input type="checkbox" value="1"> ' + str_professional_inline[0] + '<label>'
+
+                    ); // rebuild professional select
             });
             $('#form div.client_referrals').show();
             $('#form input[name=tabtitle]').val(this.value); // set title, to use in TAB
