@@ -301,14 +301,13 @@ $(function() {
             $.getJSON('/referral/client/' + this.getAttribute('hiddenValue') + '/', function(json) {
                 $('#form select[name=referral]').html('');
                 var line = '';
-                var str_professional_inline = '';
+                var str_professional_inline = [];
                 jQuery.each(json,  function(){
-                    str_professional_inline = '';
+                    str_professional_inline = [];
                     //append professional list
                     jQuery.each(this.professional,  function(){
-                        str_professional_inline += this.name + ", " ;
+                        str_professional_inline.push(this.name) ;
                     });
-                    str_professional_inline = str_professional_inline.substr(0, (str_professional_inline.length-2))
              
                     // if service is on 
                     if (this.status == "01"){ 
@@ -317,6 +316,12 @@ $(function() {
                             } else {
                                 line = line + '<option value="' + this.id + '">' + this.service + '</option>';
                             }
+
+                            // for (var i = 0; i < str_professional_list.length; i++) {
+                            //     console.log(str_professional_list[i]);
+                            // }
+
+
                     } 
                 }); 
                 $('#form select[name=referral]').html(line); // rebuild referral select
@@ -362,3 +367,4 @@ $('div.schedule').ready(function() {
     });
     
 });
+
