@@ -18,8 +18,8 @@ $(function(){
 	
 	/** global ajax events */
         	
-         $("#loading").bind("ajaxStart", function(){
-           $(this).show();
+         $(document).bind("ajaxStart", function(){
+           $("#loading").show();
            $('#over').show();
          }).bind("ajaxStop", function(){
            $(this).hide();
@@ -149,7 +149,7 @@ $(function(){
          * display hide items in ehr
          */
 
-        $('a.item_description').live('click', function() {
+        $('a.item_description').on('click', function() {
             $(this).parent('li').children('div.description:hidden').effect('blind', {'mode':'show'}, 100);
             $(this).parent('li').children('div.description:not(hidden)').hide();
         });

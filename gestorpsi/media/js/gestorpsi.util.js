@@ -34,7 +34,7 @@ function personInLine(list) {
 }
     
 $(document).ready(function() {
-    $('a.load_html').live('click', function() {
+    $('a.load_html').on('click', function() {
         var element = $(this).attr('element');
         $(element).load($(this).attr('href'));
         return false;
@@ -44,7 +44,7 @@ $(document).ready(function() {
     /**
      * generic metho to load href into DOM element
      */
-    $('a.load').live('click', function() {
+    $('a.load').on('click', function() {
         $($(this).attr('element')).load($(this).attr('href'));
         $($(this).attr('element')).show();
         //$.scrollTo(0,0, {duration:300});
@@ -55,7 +55,7 @@ $(document).ready(function() {
      * cancel_button in dialog box
      */
     
-    $('#dialog #cancel_button').live('click', function() {
+    $('#dialog #cancel_button').on('click', function() {
         //$.scrollTo(0,0, {duration:300});
         return false;
     });
