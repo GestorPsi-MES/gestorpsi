@@ -64,13 +64,10 @@ GNU General Public License for more details.
                     </div>
                     <div class="hidden client_referrals" style="margin-left: 0px !important;">
                     <label>{% trans "Service" %}*<br />
-                    <select name="referral" class="big">
+                    <select id="service" name="referral" class="big">
                     </select>
                     </label>
-                    </div>
-                    <div class="checkbox">
-                       
-                    </div>
+                    </div>  
                     <div style="clear:both"><br />
                     <a style="cursor:pointer;" onclick="$('fieldset#existing_referral_true').hide();$('fieldset.referral_group').show('slow'); ">{% trans "Schedule a Group?" %}</a>
 
@@ -129,6 +126,7 @@ GNU General Public License for more details.
 				<legend>{% trans "Professional Details" %}</legend>
 		            <div style="clear:both;"></div>
 		            <label>{% trans "Professionals" %}<br />
+                        <div id="checkbox-field"></div>
 		                <div class="overflow referral_form_professional {% if not referral.id %} hide_on_first{% endif %}">
                             {{recurrence_form.professionals}}
 		                </div>

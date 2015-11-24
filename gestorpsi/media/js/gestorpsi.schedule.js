@@ -288,6 +288,7 @@ $(function() {
         });
     });
 
+    var all_professionals = [];
     // get clients json list and draw flexbox
     $('div.schedule div#form div#fb_client').html('')
     $('div.schedule div#form div#fb_client').flexbox('/client/organization_clients/',{
@@ -297,16 +298,22 @@ $(function() {
          width: 385,
          queryDelay: 500,
          autoCompleteFirstMatch: true,
-         onSelect: function() {  
+         onSelect: function() {
             $.getJSON('/referral/client/' + this.getAttribute('hiddenValue') + '/', function(json) {
                 $('#form select[name=referral]').html('');
-                var line = '';
                 var str_professional_inline = [];
+                var line = '';
                 jQuery.each(json,  function(){
                     str_professional_inline = [];
                     //append professional list
                     jQuery.each(this.professional,  function(){
-                        str_professional_inline.push(this.name) ;
+                        str_professional_inline.push(this.name);
+                        for(var i=0; i<all_professionals.length; ++i){
+                            if(this.name == all_professionals[i]){
+                               return;
+                            }
+                        }
+                        all_professionals.push(this.name);
                     });
              
                     // if service is on 
@@ -323,18 +330,35 @@ $(function() {
 
 
                     } 
-                }); 
+                });
+
                 $('#form select[name=referral]').html(line); // rebuild referral select
-                $('#form div[class=checkbox]').html(
-
-                    '<label><input type="checkbox" value="1"> ' + str_professional_inline[0] + '<label>'
-
-                    ); // rebuild professional select
             });
+
+            $('#form select[name=referral]').live("change", function () {
+            select = document.getElementById("service");
+            selected = document.getElementById("service").selectedIndex;
+            text = select.options[selected].innerHTML;
+            document.getElementById('checkbox-field').innerHTML = '';
+             for (var i = 0; i < all_professionals.length; i++){
+                if(text.search(all_professionals[i]) != -1){
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute ("type", "checkbox");
+                    document.getElementById('checkbox-field').appendChild(checkbox);
+                    document.getElementById('checkbox-field').innerHTML +=  all_professionals[i];
+                }
+            }
+        });            
+
             $('#form div.client_referrals').show();
             $('#form input[name=tabtitle]').val(this.value); // set title, to use in TAB
+            
         }
+
+
+        
     });
+         
 
         /**
          *  show devices of the room when select or change to other room
@@ -351,6 +375,10 @@ $(function() {
         }
     });
 
+});
+
+$(function() {
+    
 });
 
 /**
