@@ -289,6 +289,7 @@ $(function() {
     });
 
     var all_professionals = [];
+    var all_professionals_id = [];
     // get clients json list and draw flexbox
     $('div.schedule div#form div#fb_client').html('')
     $('div.schedule div#form div#fb_client').flexbox('/client/organization_clients/',{
@@ -305,6 +306,8 @@ $(function() {
                 var line = '';
                 jQuery.each(json,  function(){
                     str_professional_inline = [];
+
+                        console.log(this.professional);
                     //append professional list
                     jQuery.each(this.professional,  function(){
                         str_professional_inline.push(this.name);
@@ -314,6 +317,7 @@ $(function() {
                             }
                         }
                         all_professionals.push(this.name);
+                        all_professionals_id.push(this.id);
                     });
              
                     // if service is on 
@@ -344,6 +348,7 @@ $(function() {
                 if(text.search(all_professionals[i]) != -1){
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute ("type", "checkbox");
+                    checkbox.setAttribute ("id", all_professionals_id[i]);
                     document.getElementById('checkbox-field').appendChild(checkbox);
                     document.getElementById('checkbox-field').innerHTML +=  all_professionals[i];
                 }
