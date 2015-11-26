@@ -307,7 +307,6 @@ $(function() {
                 jQuery.each(json,  function(){
                     str_professional_inline = [];
 
-                        console.log(this.professional);
                     //append professional list
                     jQuery.each(this.professional,  function(){
                         str_professional_inline.push(this.name);
@@ -329,7 +328,6 @@ $(function() {
                             }
 
                             for (var i = 0; i < str_professional_inline.length; i++) {
-                                console.log(this.service + str_professional_inline);
                             }
 
 
@@ -348,7 +346,9 @@ $(function() {
                 if(text.search(all_professionals[i]) != -1){
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute ("type", "checkbox");
-                    checkbox.setAttribute ("id", all_professionals_id[i]);
+                    checkbox.setAttribute ("name", "professional");
+                    checkbox.setAttribute ("value", all_professionals_id[i]);
+                    checkbox.setAttribute ("checked",true);
                     document.getElementById('checkbox-field').appendChild(checkbox);
                     document.getElementById('checkbox-field').innerHTML +=  all_professionals[i];
                 }
@@ -369,7 +369,7 @@ $(function() {
          *  show devices of the room when select or change to other room
          */
 
-        $("form.schedule div.main_area select#id_room").change(function(){ 
+        $("form.schedule div.main_'rea sel'ct#id_room").change(function(){ 
         $('select[name=device] option').remove();
         if (this.value != ''){
             $.getJSON("/device/" + $(this).attr("value") + "/listdevice/", function(json) {
