@@ -64,6 +64,7 @@ from gestorpsi.util.views import get_object_or_None, write_pdf
 from gestorpsi.util.models import Cnae
 from gestorpsi.ehr.views import _access_ehr_check_read
 from gestorpsi.place.models import Place
+from decimal import Decimal
 
 def _access_check(request, object=None):
     """
@@ -767,8 +768,7 @@ def save(request, object_id = None, is_company = False):
         object = Client()
         person = Person()
         payment_condition = PaymentCondition()
-
-    else:        
+    else:
         object = get_object_or_404(Client, pk=object_id, person__organization=request.user.get_profile().org_active)
         person = object.person
         payment_condition = object.payment_condition
@@ -781,18 +781,25 @@ def save(request, object_id = None, is_company = False):
     org = get_object_or_404(Organization, pk=user.get_profile().org_active.id )
     org.last_id_record = org.last_id_record + 1
     org.save()
-    payment_condition.payment_condition = request.POST["payment_condition"]
+
+    if request.POST.get("payment_condition") == None:
+        payment_condition.payment_condition = Decimal(0)
+    else:
+        payment_condition.payment_condition = request.POST["payment_condition"]
+    if request.POST.get("value_for_payment") == None:
+        payment_condition.value_for_payment = Decimal(0)
 
     payment_condition.value_for_payment = request.POST["value_for_payment"] if float(payment_condition.payment_condition) == PAYMENT_CONDITION[0][0] else float(0)
+
     payment_condition.save()
     object.payment_condition = payment_condition
-    
+
     # Admission date
     object.idRecord = org.last_id_record + 1
     object.admission_date = datetime.now()
     object.person = person_save(request, person)
 
-    if request.POST["salary"] == "":
+    if request.POST.get("salary") == None:
         object.person.salary = 0
     else:
         object.person.salary = request.POST["salary"]
@@ -820,7 +827,7 @@ def save(request, object_id = None, is_company = False):
     messages.success(request, _('Client saved successfully'))
 
     return HttpResponseRedirect('/client/%s/home' % object.id)
-    
+
 
 @permission_required_with_403('client.client_read')
 def client_print(request, object_id = None):
