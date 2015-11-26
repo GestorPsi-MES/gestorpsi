@@ -34,10 +34,19 @@ $(function() {
 
     $('form.form_people').validate({
         rules: {
-            name: "required"
+            name: "required",
+            document_document: "required",
+            document_issuer: "required",
+            document_state: "required",
+            document_identifier: "required"
+
         },
         messages: {
-            name: 'Preenchimento Necessário'
+            name: 'Preenchimento Necessário',
+            document_document: 'Preenchimento Necessário',
+            document_issuer: 'Preenchimento Necessário',
+            document_state: 'Preenchimento Necessário',
+            document_identifier: 'Preenchimento Necessário'
         }
     });
 
@@ -112,8 +121,8 @@ $(function() {
             name: 'Preenchimento Necessário'
         }
     });
-    
-     
+
+
      /**
       *
       * contact post form
@@ -184,7 +193,7 @@ $(function() {
             name: 'Preenchimento Necessário'
         }
     });
-    
+
     /**
      *
      * rooms post form
@@ -241,7 +250,7 @@ $(function() {
             name: 'Preenchimento Necessário'
         }
     });
-     
+
      /**
      *
      * device type  post form
@@ -450,7 +459,7 @@ $(function() {
             message: 'Preenchimento Necessário'
         }
     });
-    
+
      /**
      *
      * ehr session form
@@ -468,7 +477,7 @@ $(function() {
             occurrence: 'Preenchimento Necessário'
         }
     });
-    
+
      /**
      *
      * ehr diagnosis form
@@ -486,7 +495,7 @@ $(function() {
             diagnosis: 'Preenchimento Necessário'
         }
     });
-    
+
      /**
      *
      * ehr demand form
