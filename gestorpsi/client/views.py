@@ -346,10 +346,8 @@ def form(request, object_id=''):
     try:
         profile = get_object_or_404(Profile, person=object.person.id)
         for g in profile.user.groups.all():
-            if g.name == "administrator": groups[0] = True
-            if g.name == "psychologist":  groups[1] = True
-            if g.name == "secretary":     groups[2] = True
-            if g.name == "client":        groups[3] = True
+            groups[group_finder(g.name)] = True
+
     except:
         profile = Profile()
         profile.person = get_object_or_404(Person, pk=object.person.id)
@@ -394,6 +392,14 @@ def form(request, object_id=''):
                                },
                               context_instance=RequestContext(request)
                               )
+
+def group_finder(group_name):
+    return {
+        'administrator' : 0,
+        'psychologist'  : 1,
+        'secretary'     : 2,
+        'client'        : 3,
+        }[group_name]
 
 @permission_required_with_403('client.client_read')
 def add_company(request, object_id=''):
@@ -768,7 +774,7 @@ def save(request, object_id = None, is_company = False):
         person = Person()
         payment_condition = PaymentCondition()
 
-    else:        
+    else:
         object = get_object_or_404(Client, pk=object_id, person__organization=request.user.get_profile().org_active)
         person = object.person
         payment_condition = object.payment_condition
@@ -786,7 +792,7 @@ def save(request, object_id = None, is_company = False):
     payment_condition.value_for_payment = request.POST["value_for_payment"] if float(payment_condition.payment_condition) == PAYMENT_CONDITION[0][0] else float(0)
     payment_condition.save()
     object.payment_condition = payment_condition
-    
+
     # Admission date
     object.idRecord = org.last_id_record + 1
     object.admission_date = datetime.now()
@@ -820,7 +826,7 @@ def save(request, object_id = None, is_company = False):
     messages.success(request, _('Client saved successfully'))
 
     return HttpResponseRedirect('/client/%s/home' % object.id)
-    
+
 
 @permission_required_with_403('client.client_read')
 def client_print(request, object_id = None):
