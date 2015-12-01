@@ -38,23 +38,6 @@ def form(request):
     except:
         raise Http404
 
-    countries = Country.objects.all()
-    PhoneTypes = PhoneType.objects.all()
-    AddressTypes = AddressType.objects.all()
-    EmailTypes = EmailType.objects.all()
-    IMNetworks = IMNetwork.objects.all()
-    TypeDocuments = TypeDocument.objects.all()
-    Issuers = Issuer.objects.all()
-    States = State.objects.all()
-    MaritalStatusTypes = MaritalStatus.objects.all()
-
-    phones    = object.person.phones.all()
-    addresses = object.person.address.all()
-    documents = object.person.document.all()
-    emails    = object.person.emails.all()
-    websites  = object.person.sites.all()
-    ims       = object.person.instantMessengers.all()
-
     return render_to_response('profile/profile_person.html', locals(), context_instance=RequestContext(request))
 
 def form_careprofessional(request):
