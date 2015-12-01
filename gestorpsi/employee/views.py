@@ -94,7 +94,6 @@ def form(request, object_id=None):
                                 'object': object,
                                 'phones' : None if not hasattr(object, 'person') else object.person.phones.all(),
                                 'addresses' : None if not hasattr(object, 'person') else object.person.address.all(),
-                                'documents' : None if not hasattr(object, 'person') else object.person.document.all(),
                                 'emails' : None if not hasattr(object, 'person') else object.person.emails.all(),
                                 'websites' : None if not hasattr(object, 'person') else object.person.sites.all(),
                                 'ims' : None if not hasattr(object, 'person') else object.person.instantMessengers.all(),
@@ -103,12 +102,15 @@ def form(request, object_id=None):
                                 'AddressTypes': AddressType.objects.all(),
                                 'EmailTypes': EmailType.objects.all(),
                                 'IMNetworks': IMNetwork.objects.all() ,
-                                'TypeDocuments': TypeDocument.objects.all(),
                                 'Issuers': Issuer.objects.all(),
                                 'States': State.objects.all(),
                                 'MaritalStatusTypes': MaritalStatus.objects.all(),
                                 'Cities': cities,
                               }, context_instance=RequestContext(request))
+
+# def request_user_has_perm (has_perm):
+#     if not request.user.has_perm('employee.employee_write'):
+#             return render_to_response('403.html', {'object': _("Oops! You don't have access for this service!"), }, context_instance=RequestContext(request))
 
 @permission_required_with_403('employee.employee_write')
 def save(request, object_id=None):

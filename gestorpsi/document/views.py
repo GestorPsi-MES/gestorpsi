@@ -37,7 +37,6 @@ def document_list(
         ids, type_documents, documents, document_identifiers, issuers, states):
     objs = []
     for i in range(0, len(documents)):
-        if (len(documents[i])):
 
             if len(type_documents[i]):
                 td = TypeDocument.objects.get(pk=type_documents[i])
